@@ -49,6 +49,15 @@ namespace PersonaEditorGUI.Controls
                 if (fileInfo.Length > 1000000000)
                     return;
 
+                string[] filePaths = Directory.GetFiles(@"E:\Games\P5RUS\cpk\", "*.pak",
+                                                        SearchOption.AllDirectories);
+                for (int i = 0; i < filePaths.Length; i++)
+                {
+                    System.Diagnostics.Debug.WriteLine(filePaths[i]);
+                }
+
+                return;
+
                 //FileStream = new FileStream(path, FileMode.Open, FileAccess.Read);
 
                 //var file = PersonaEditorLib.Utilities.PersonaFile.OpenFile(Path.GetFileName(path),
@@ -58,8 +67,6 @@ namespace PersonaEditorGUI.Controls
                 var file = PersonaEditorLib.Utilities.PersonaFile.OpenFile(Path.GetFileName(path),
                     File.ReadAllBytes(path),
                     PersonaEditorLib.Utilities.PersonaFile.GetFileType(Path.GetFileName(path)));
-
-                System.Diagnostics.Debug.WriteLine("soska report");
 
                 if (file.Object != null)
                 {
