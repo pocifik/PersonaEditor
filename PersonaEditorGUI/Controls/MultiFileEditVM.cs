@@ -59,6 +59,8 @@ namespace PersonaEditorGUI.Controls
                     File.ReadAllBytes(path),
                     PersonaEditorLib.Utilities.PersonaFile.GetFileType(Path.GetFileName(path)));
 
+                System.Diagnostics.Debug.WriteLine("soska report");
+
                 if (file.Object != null)
                 {
                     Tree.SetRoot(file);
