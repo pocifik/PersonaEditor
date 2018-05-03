@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using PersonaEditorGUI.Classes;
+using PersonaEditorLib.Extension;
 using PersonaEditorLib;
 using PersonaEditorLib.Interfaces;
 using System;
@@ -45,19 +46,21 @@ namespace PersonaEditorGUI.Controls
         {
             if (Tab.CloseAll())
             {
+                /*
                 FileInfo fileInfo = new FileInfo(path);
                 if (fileInfo.Length > 1000000000)
                     return;
+                */
 
                 string[] filePaths = Directory.GetFiles(@"E:\Games\P5RUS\cpk\", "*",
                                                         SearchOption.AllDirectories);
                 for (int i = 0; i < filePaths.Length; i++)
                 {
                     string filePath = filePaths[i];
-                    var file = PersonaEditorLib.Utilities.PersonaFile.OpenFile(
-                        Path.GetFileName(filePath),
-                        File.ReadAllBytes(filePath),
-                        PersonaEditorLib.Utilities.PersonaFile.GetFileType(Path.GetFileName(filePath)));
+                    string fileName = Path.GetFileName(filePath);
+                    byte[] fileData = File.ReadAllBytes(filePath);
+                    FileType fileType = PersonaEditorLib.Utilities.PersonaFile.GetFileType(fileName);
+                    var file = PersonaEditorLib.Utilities.PersonaFile.OpenFile(fileName, fileData, fileType);
                     if (file == null) {
                         System.Diagnostics.Debug.WriteLine(filePath);
                         return;
