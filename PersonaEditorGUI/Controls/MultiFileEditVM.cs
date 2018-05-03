@@ -65,7 +65,7 @@ namespace PersonaEditorGUI.Controls
                     FileType fileType = PersonaEditorLib.Utilities.PersonaFile.GetFileType(fileName);
                     var file = PersonaEditorLib.Utilities.PersonaFile.OpenFile(fileName, fileData, fileType);
                     if (file.Object != null) {
-                        if (file.Object is BMD bmd)
+                        if (file.Object is PersonaEditorLib.FileStructure.Text.BMD bmd)
                         {
                             if (bmd.Msg.Length > 0)
                             {
