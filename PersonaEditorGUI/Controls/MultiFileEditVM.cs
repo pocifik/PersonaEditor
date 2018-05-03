@@ -67,7 +67,7 @@ namespace PersonaEditorGUI.Controls
                     if (file.Object != null) {
                         if (file.Object is PersonaEditorLib.FileStructure.Text.BMD bmd)
                         {
-                            if (bmd.Msg.Length > 0)
+                            if (bmd.Msg.Count > 0)
                             {
                                 outputStream.WriteLine(filePath + ";Text");
                             }
