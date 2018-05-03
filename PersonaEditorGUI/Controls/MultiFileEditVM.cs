@@ -52,8 +52,11 @@ namespace PersonaEditorGUI.Controls
                     return;
                 */
 
-                string[] filePaths = Directory.GetFiles(@"E:\Games\P5RUS\cpk\", "*",
+                string[] filePaths = Directory.GetFiles(@"E:\Games\P5RUS\cpk\", "*.bmd",
                                                         SearchOption.AllDirectories);
+
+                StreamWriter outputStream = new StreamWriter("write.txt");
+
                 for (int i = 0; i < filePaths.Length; i++)
                 {
                     string filePath = filePaths[i];
@@ -61,11 +64,11 @@ namespace PersonaEditorGUI.Controls
                     byte[] fileData = File.ReadAllBytes(filePath);
                     FileType fileType = PersonaEditorLib.Utilities.PersonaFile.GetFileType(fileName);
                     var file = PersonaEditorLib.Utilities.PersonaFile.OpenFile(fileName, fileData, fileType);
-                    if (file == null) {
-                        System.Diagnostics.Debug.WriteLine(filePath);
-                        return;
+                    if (file.Object != null) {
+                        if (file.Object.msg.Length > 0) {
+                            outputStream.WriteLine(filePath + ";Text");
+                        }
                     }
-                    
                 }
 
                 return;
