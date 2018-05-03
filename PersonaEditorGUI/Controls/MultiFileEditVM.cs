@@ -49,11 +49,20 @@ namespace PersonaEditorGUI.Controls
                 if (fileInfo.Length > 1000000000)
                     return;
 
-                string[] filePaths = Directory.GetFiles(@"E:\Games\P5RUS\cpk\", "*.pak",
+                string[] filePaths = Directory.GetFiles(@"E:\Games\P5RUS\cpk\", "*",
                                                         SearchOption.AllDirectories);
                 for (int i = 0; i < filePaths.Length; i++)
                 {
-                    System.Diagnostics.Debug.WriteLine(filePaths[i]);
+                    string filePath = filePaths[i];
+                    var file = PersonaEditorLib.Utilities.PersonaFile.OpenFile(
+                        Path.GetFileName(filePath),
+                        File.ReadAllBytes(filePath),
+                        PersonaEditorLib.Utilities.PersonaFile.GetFileType(Path.GetFileName(filePath)));
+                    if (file == null) {
+                        System.Diagnostics.Debug.WriteLine(filePath);
+                        return;
+                    }
+                    
                 }
 
                 return;
