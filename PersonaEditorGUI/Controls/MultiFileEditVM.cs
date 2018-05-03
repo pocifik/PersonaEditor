@@ -73,6 +73,8 @@ namespace PersonaEditorGUI.Controls
                 //    PersonaEditorLib.Utilities.PersonaFile.GetFileType(Path.GetFileName(path)),
                 //    new StreamFile(FileStream, FileStream.Length, 0));
 
+                /*
+
                 var file = PersonaEditorLib.Utilities.PersonaFile.OpenFile(Path.GetFileName(path),
                     File.ReadAllBytes(path),
                     PersonaEditorLib.Utilities.PersonaFile.GetFileType(Path.GetFileName(path)));
@@ -82,6 +84,7 @@ namespace PersonaEditorGUI.Controls
                     Tree.SetRoot(file);
                     _OpenFileName = Path.GetFullPath(path);
                 }
+                */
             }
         }
 
