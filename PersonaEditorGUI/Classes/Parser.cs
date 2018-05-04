@@ -39,7 +39,7 @@ namespace PersonaEditorGUI.Classes
                 string filePath = filePaths[i];
                 string fileName = Path.GetFileName(filePath);
                 byte[] fileData = File.ReadAllBytes(filePath);
-                myFileType fileType = PersonaEditorLib.Utilities.PersonaFile.GetFileType(fileName);
+                PersonaEditorLib.Interfaces.FileType fileType = PersonaEditorLib.Utilities.PersonaFile.GetFileType(fileName);
                 var file = PersonaEditorLib.Utilities.PersonaFile.OpenFile(fileName, fileData, fileType);
                 if (file.Object != null)
                 {
