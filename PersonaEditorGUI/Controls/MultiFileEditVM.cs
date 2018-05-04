@@ -71,16 +71,7 @@ namespace PersonaEditorGUI.Controls
                             {
                                 outputStream.WriteLine(filePath + ";Text");
                             }
-                            else {
-                                outputStream.WriteLine(filePath + ";OBJECT MSG COUNT IS 0");
-                            }
                         }
-                        else {
-                            outputStream.WriteLine(filePath + ";OBJECT IS NOT BMD");
-                        }
-                    }
-                    else {
-                        outputStream.WriteLine(filePath + ";OBJECT IS NULL");
                     }
                 }
 
