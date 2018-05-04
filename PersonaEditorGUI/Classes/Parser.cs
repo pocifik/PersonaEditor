@@ -5,19 +5,20 @@ using System.IO;
 namespace PersonaEditorGUI.Classes
 {
     [Flags]
-    public enum FileType
+    public enum myFileType
     {
-        None = 1,
-        Text = 2,
-        Graphic = 4,
+        None    = 0,
+        Text    = 1,
+        Graphic = 2,
+        FTD     = 4,
     }
 
     public struct ValidFile
     {
         public string path;
-        public FileType types;
+        public myFileType types;
 
-        public ValidFile(string path, FileType types)
+        public ValidFile(string path, myFileType types)
         {
             this.path = path;
             this.types = types;
@@ -26,7 +27,7 @@ namespace PersonaEditorGUI.Classes
 
     public static class Parser
     {
-        public static void Run()
+        public static List<ValidFile> Run()
         {
             List<ValidFile> validFiles = new List<ValidFile>();
 
@@ -38,43 +39,48 @@ namespace PersonaEditorGUI.Classes
                 string filePath = filePaths[i];
                 string fileName = Path.GetFileName(filePath);
                 byte[] fileData = File.ReadAllBytes(filePath);
-                FileType fileType = PersonaEditorLib.Utilities.PersonaFile.GetFileType(fileName);
+                myFileType fileType = PersonaEditorLib.Utilities.PersonaFile.GetFileType(fileName);
                 var file = PersonaEditorLib.Utilities.PersonaFile.OpenFile(fileName, fileData, fileType);
                 if (file.Object != null)
                 {
                     validFiles.Add(filePath, GetFileType(file.Object));
-
                 }
             }
+
+            return validFiles;
         }
 
-        public static FileType GetFileType(object fileObject)
+        public static myFileType GetFileType(object fileObject)
         {
             if (fileObject is PersonaEditorLib.FileStructure.Text.BMD bmd)
             {
                 if (bmd.Msg.Count > 0)
                 {
-                    return FileType.Text;
+                    return myFileType.Text;
                 }
             }
             else if (fileObject is PersonaEditorLib.FileStructure.Graphic.DDS dds)
             {
-                return FileType.Graphic;
+                return myFileType.Graphic;
             }
             else if (fileObject is PersonaEditorLib.FileStructure.Container.BIN bin)
             {
-                FileType fileTypes = FileType.None;
+                myFileType fileTypes = myFileType.None;
                 for (int i = 0; i < bin.SubFiles.Count; i++)
                 {
-                    FileType fileType = GetFileType(bin.SubFiles[i]);
+                    myFileType fileType = GetFileType(bin.SubFiles[i]);
                     if (!fileType.HasFlag(fileType))
-                        fileTypes |= fileType;
+                            fileTypes |= fileType;
                 }
 
                 return fileTypes;
             }
+            else if (fileObject is PersonaEditorLib.FileStructure.Text.FTD ftd)
+            {
+                return myFileType.FTD;
+            }
 
-            return FileType.None;
+            return myFileType.None;
         }
     }
 }
