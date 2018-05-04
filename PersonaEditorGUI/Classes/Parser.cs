@@ -43,7 +43,7 @@ namespace PersonaEditorGUI.Classes
                 var file = PersonaEditorLib.Utilities.PersonaFile.OpenFile(fileName, fileData, fileType);
                 if (file.Object != null)
                 {
-                    validFiles.Add(filePath, GetFileType(file.Object));
+                    validFiles.Add(new ValidFile(filePath, GetFileType(file.Object)));
                 }
             }
 
